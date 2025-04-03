@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Jauhar Ghyas Ansari - Android Developer</title>
+    <style>
+        :root {
+            --primary-color: #4ecca3; /* Adjusted to a slightly different shade */
+            --dark-bg: #121212; /* Darker black background */
+            --text-light: #ffffff;
+            --text-dark: #121212;
+            --card-bg: rgba(255, 255, 255, 0.05); /* More transparent cards */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 18px; /* Increased base font size */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 70px 0; /* Increased padding */
+        }
+        
+        .header-content {
+            max-width: 60%;
+        }
+        
+        .header-image {
+            width: 35%;
+            text-align: right;
+        }
+        
+        .profile-img {
+            width: 320px; /* Slightly larger */
+            height: 380px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(78, 204, 163, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        h1 {
+            font-size: 6rem; /* Even larger name */
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(78, 204, 163, 0.3);
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        h2 {
+            font-size: 2rem; /* Increased subtitle size */
+            color: var(--text-light);
+            margin-bottom: 25px;
+            animation: fadeInLeft 1s ease-out 0.2s;
+            animation-fill-mode: both;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem; /* Larger paragraph text */
+            line-height: 1.8;
+            animation: fadeInLeft 1s ease-out 0.4s;
+            animation-fill-mode: both;
+        }
+        
+        .contact-info {
+            margin-top: 40px;
+            animation: fadeInLeft 1s ease-out 0.6s;
+            animation-fill-mode: both;
+        }
+        
+        .contact-title {
+            font-size: 1.8rem; /* Larger section title */
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-details a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem; /* Larger contact info */
+            transition: all 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            width: 32px; /* Larger icons */
+            height: 32px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px; /* Increased gap */
+            margin: 70px 0; /* More vertical space */
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px; /* More padding */
+            height: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(78, 204, 163, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(78, 204, 163, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(78, 204, 163, 0.2);
+            border: 1px solid rgba(78, 204, 163, 0.3);
+        }
+        
+        .card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-size: 2rem; /* Larger card titles */
+            margin-bottom: 30px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .card:hover .card-title::after {
+            width: 100%;
+        }
+        
+        .education-entry, .work-entry {
+            margin-bottom: 30px; /* More space between entries */
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .education-entry:hover, .work-entry:hover {
+            background-color: rgba(78, 204, 163, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .date {
+            color: var(--primary-color);
+            font-size: 1.1rem; /* Larger date */
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .institution {
+            font-weight: 600;
+            font-size: 1.3rem; /* Larger institution name */
+            margin-bottom: 5px;
+        }
+        
+        .program {
+            font-size: 1.1rem; /* Larger program text */
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* More space between skill tags */
+            margin-bottom: 30px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(78, 204, 163, 0.15);
+            color: var(--text-light);
+            padding: 8px 20px; /* Larger skill tags */
+            border-radius: 25px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(78, 204, 163, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-tag::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+        
+        .skill-tag:hover {
+            background-color: rgba(78, 204, 163, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.2);
+        }
+        
+        .software-title {
+            margin: 30px 0 15px;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+        
+        .software-icons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .software-icon {
+            width: 50px; /* Larger icons */
+            height: 50px;
+            background-color: rgba(78, 204, 163, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            border: 1px solid rgba(78, 204, 163, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .software-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(78, 204, 163, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .software-icon:hover::after {
+            opacity: 1;
+        }
+        
+        .software-icon:hover {
+            background-color: rgba(78, 204, 163, 0.3);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
+        }
+        
+        .projects-section, .certificates-section {
+            margin: 70px 0; /* More vertical space */
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5rem; /* Larger section titles */
+            margin-bottom: 40px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(78, 204, 163, 0.1);
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .project-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .project-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, var(--primary-color));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(78, 204, 163, 0.15);
+            border: 1px solid rgba(78, 204, 163, 0.3);
+        }
+        
+        .project-title {
+            font-size: 1.5rem; /* Larger project titles */
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .project-card:hover .project-title::after {
+            width: 100%;
+        }
+        
+        .project-description {
+            margin-bottom: 20px;
+            font-size: 1.1rem; /* Larger description text */
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tech-used {
+            font-style: italic;
+            color: var(--primary-color);
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-media {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            text-align: center;
+            padding: 50px 0; /* More vertical padding */
+            border-radius: 40px 40px 0 0;
+            margin-top: 70px;
+        }
+        
+        .social-title {
+            font-size: 3rem; /* Larger social title */
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            background-color: white;
+            border-radius: 15px;
+            padding: 15px 25px; /* Larger social buttons */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dark-bg);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: 0.5s;
+        }
+        
+        .social-icon:hover::before {
+            left: 100%;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .wave-svg {
+            margin-top: -1px;
+            width: 100%;
+            display: block;
+        }
+        
+        a.certificate-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        a.certificate-link:hover {
+            transform: translateX(5px);
+        }
+        
+        a.certificate-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        a.certificate-link:hover::after {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 0;
+            }
+            
+            .header-content, .header-image {
+                max-width: 100%;
+                text-align: center;
+            }
+            
+            .header-image {
+                margin-top: 40px;
+            }
+            
+            h1 {
+                font-size: 4rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-details a {
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .card-title {
+                font-size: 1.8rem;
+            }
+            
+            .social-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Jauhar Ansari</h1>
+                <h2>Android Developer</h2>
+                <p>My name is MD Jauhar Ghyas Ansari, and I'm currently pursuing B.Tech in Computer Science.</p>
+                <p>I'm an innovative Android developer with hands-on experience in designing, developing, and maintaining high-performance mobile applications. I'm skilled in Kotlin programming language and Android SDK, with a strong focus on clean architecture and UI/UX best practices.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-title">Contact.</div>
+                    <div class="contact-details">
+                        <a href="tel:+917838677350">
+                            <span class="contact-icon">📱</span>
+                            +91 7838677350
+                        </a>
+                        <a href="mailto:ja54321anderson@gmail.com">
+                            <span class="contact-icon">✉️</span>
+                            ja54321anderson@gmail.com
+                        </a>
+                        <a href="#">
+                            <span class="contact-icon">📍</span>
+                            Sector 8 Faridabad, 121006 Haryana
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="header-image">
+                <img src="/api/placeholder/320/380" alt="Profile Photo" class="profile-img">
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <!-- Swapped the order of cards - Skills first, then Education -->
+            <div class="card">
+                <div class="card-title">Skills.</div>
+                <div class="skills-container">
+                    <div class="skill-tag">Kotlin</div>
+                    <div class="skill-tag">XML</div>
+                    <div class="skill-tag">Android SDK</div>
+                    <div class="skill-tag">Jetpack Compose</div>
+                    <div class="skill-tag">Room Database</div>
+                    <div class="skill-tag">MVVM Architecture</div>
+                    <div class="skill-tag">Clean Architecture</div>
+                    <div class="skill-tag">Retrofit</div>
+                    <div class="skill-tag">Firebase</div>
+                    <div class="skill-tag">Coroutines</div>
+                    <div class="skill-tag">Lottiefiles Animation</div>
+                </div>
+                
+                <div class="software-title">Key Technologies</div>
+                <div class="software-icons">
+                    <div class="software-icon"><img src="kotlin48.png" alt="KT"></div>
+                    <div class="software-icon"><img src="androidstudio48.png" alt="SDK"></div>
+                    <div class="software-icon"><img src="iconjava48.png" alt="JV"></div>
+                    <div class="software-icon"><img src="icon48.png" alt="FB"></div>
+                    <div class="software-icon"><img src="jetpackcompose.png" alt="JC"></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Education.</div>
+                <div class="education-entry">
+                    <div class="date">2022 - 2026</div>
+                    <div class="institution">Bhagwan Parshuram Institute of Technology</div>
+                    <div class="program">Bachelor of Technology in Computer Science</div>
+                    <div class="program">Average SGPA: 7.3</div>
+                </div>
+                <div class="education-entry">
+                    <div class="date">2020 - 2022</div>
+                    <div class="institution">Paramount Academy</div>
+                    <div class="program">Higher Secondary Examination</div>
+                    <div class="program">Percentage: 74%</div>
+                </div>
+                <div class="education-entry">
+                    <div class="date">2020</div>
+                    <div class="institution">K N MEMO Academy</div>
+                    <div class="program">Secondary Examination</div>
+                    <div class="program">Percentage: 85%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="projects-section">
+            <div class="section-title">Projects.</div>
+            
+            <div class="project-card">
+                <div class="project-title">Outfit Recommendation App</div>
+                
+               
+                <div class="project-description">
+                    An Outfit recommendation app that suggests clothing based on real-time weather data. Features include outfit recommendation based on your city weather, providing safety tips according to weather, and buying outfit from online stores like ZARA, AMAZON etc.
+                </div>
+                <div class="tech-used">Technologies Used : Kotlin, Retrofit for API calls, OpenWeather API</div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">ShuShiv (Wedding Arrangement App)</div>
+                
+                <div class="project-description">
+                    Developed an all-in-one mobile application to help users organize and plan their weddings by providing access to wedding-related services such as shops, caterers, card designers, and more. Integrated interactive maps that allow users to locate wedding service providers and view their contact details, including phone numbers and shop addresses.
+                </div>
+                <div class="tech-used">Technologies Used : Kotlin, Google MAP Api, Firebase Database and Authentication</div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">ChatFlow Application</div>
+              
+                <div class="project-description">
+                    A Real-time Chat Application that allows users to communicate instantly. Features include one-to-one messaging, one-to-one voice and video calling.
+                </div>
+                <div class="tech-used">Technologies Used : Firebase Realtime Database, Firebase Authentication, ZEGO CLOUD (for Audio and Video Call)</div>
+            </div>
+        </div>
+        
+        <div class="certificates-section">
+            <div class="section-title">Certificates.</div>
+            
+            <div class="project-card">
+                <div class="project-title">Android Development</div>
+                <a href="https://media-hosting.imagekit.io/53c177bd07734349/androidDevlopmentCertificate.jpg?Expires=1838223087&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=WSjbp4z4JH0u78waU13uxbujH2W8q8Y7MHQE6HwsnhrX7r1T2QOP3EqibANXEpoXNpGXUN4NQZTQUzpcZGAC-0idE8lVX6k38RvXf3LNo7E~HGb9ku95O627qzdNp2IlQNfee0~JWM1xEu8r5cXxRk1XTxfy-brUcFnGyuqAMTBznFHpzvmmpJ052u2U7j1-GccdTOt1a4bQ6IBj1a~uAqWcrE8c1Jqq0rq3eN-sGXd6zNgLL5pd-tKBfyFpACupLopinbUQ4CfdhqKGYIt9QYSAshD9WF-VqmOPsiuD9zV6gqBzvqvOzGxcbt6D65FDz6jckC343EawwrGFs7GAwA__" class="certificate-link">Certificate Link</a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-title">Kotlin Language</div>
+                <a href="https://media-hosting.imagekit.io/c7637d6113bb4227/kotlinCertificate.jpg?Expires=1838222846&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=xmunmc6znIHh-1p6z5~ns0oveZWx4Tm6Efg9657Gj2-1TTjgUonlZbdOzPaGzn8XiGJYXq3qqM-d7FFtBbXnCr8ne65vzQ0-3EG3Wmv5KeaIB016RRP~nrnoEf0Brm1h4CccdZ~GTBYjEKSS4dQ7-wvL72dmwyGImegozQzkNvoT9~Z1o7eeot70uUaeqWVJqn12Tr22d4Z5UWxMnTBj9COz1aHYl-uejJ8CBOkWe~DXCZPYJUcHmrCXYYX8rFnGUjqqvHT8EFeEqq79nt2qKPkaNuyQu35CQAEquIS-bmVH5z5zVzVdXFDxsWtIRFGFObBWL7gEq-RHNteoKGOJOg__" class="certificate-link">Certificate Link</a>
+            </div>
+        </div>
+        
+        <svg class="wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+            <path fill="#4ecca3" fill-opacity="1" d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,42.7C840,32,960,32,1080,42.7C1200,53,1320,75,1380,85.3L1440,96L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"></path>
+        </svg>
+        
+        <div class="social-media">
+            <div class="social-title">Portfolio & Social Media</div>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/jauhar-ansari-371523326/" class="social-icon">
+                    <span>📱</span> LinkedIn
+                </a>
+                <a href="#" class="social-icon">
+                    <span>📸</span> Instagram
+                </a>
+                <a href="https://github.com/JauharAnsari" class="social-icon">
+                    <span>📁</span> GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
